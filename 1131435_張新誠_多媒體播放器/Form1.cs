@@ -12,6 +12,9 @@ namespace _1131435_張新誠_多媒體播放器
 {
     public partial class frmMediaPlayer: Form
     {
+        int initWidth = 0;
+        int initHeight = 0;
+        Dictionary<string, Rectangle> initControl = new Dictionary<string, Rectangle>();
         public frmMediaPlayer()
         {
             InitializeComponent();
@@ -51,6 +54,14 @@ namespace _1131435_張新誠_多媒體播放器
         private void frmMediaPlayer_Load(object sender, EventArgs e)
         {
             wmpVideo.uiMode = "none";
+            lblTime.Text = "00:00 / 00:00";
+            this.initWidth = this.Width;
+            this.initHeight = this.Height;
+
+            foreach (Control ctl in this.Controls)
+            {
+                this.initControl.Add(ctl.Name, new Rectangle(ctl.Left, ctl.Top, ctl.Width, ctl.Height));
+            }
         }
 
         private void tmrPlay_Tick(object sender, EventArgs e)
@@ -68,7 +79,25 @@ namespace _1131435_張新誠_多媒體播放器
         private void trbProgress_Scroll(object sender, EventArgs e)
         {
             wmpVideo.Ctlcontrols.currentPosition = trbProgress.Value;
-            lblTime.Text = "00:00 / 00:00";
+        }
+
+        private void frmMediaPlayer_SizeChanged(object sender, EventArgs e)
+        {
+            if (initWidth == 0) return;
+
+            double iRatioWidth = (double)this.Width / this.initWidth;
+            double iRatioHeight = (double)this.Height / this.initHeight;
+
+            foreach (Control ctl in this.Controls)
+            {
+                if (initControl.ContainsKey(ctl.Name))
+                {
+                    ctl.Left = (int)(initControl[ctl.Name].Left * iRatioWidth);
+                    ctl.Top = (int)(initControl[ctl.Name].Top * iRatioHeight);
+                    ctl.Width = (int)(initControl[ctl.Name].Width * iRatioWidth);
+                    ctl.Height = (int)(initControl[ctl.Name].Height * iRatioHeight);
+                }
+            }
         }
     }
 }

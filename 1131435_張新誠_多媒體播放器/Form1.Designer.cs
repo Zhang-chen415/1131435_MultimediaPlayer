@@ -149,6 +149,7 @@
             this.Name = "frmMediaPlayer";
             this.Text = "多媒體播放器";
             this.Load += new System.EventHandler(this.frmMediaPlayer_Load);
+            this.SizeChanged += new System.EventHandler(this.frmMediaPlayer_SizeChanged);
             this.palButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wmpVideo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbProgress)).EndInit();
