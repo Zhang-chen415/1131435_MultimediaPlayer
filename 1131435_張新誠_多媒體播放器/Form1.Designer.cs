@@ -38,8 +38,12 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.wmpVideo = new AxWMPLib.AxWindowsMediaPlayer();
+            this.trbProgress = new System.Windows.Forms.TrackBar();
+            this.tmrPlay = new System.Windows.Forms.Timer(this.components);
+            this.lblTime = new System.Windows.Forms.Label();
             this.palButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wmpVideo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbProgress)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -49,11 +53,12 @@
             // 
             // palButton
             // 
+            this.palButton.Controls.Add(this.lblTime);
             this.palButton.Controls.Add(this.btnStop);
             this.palButton.Controls.Add(this.btnPause);
             this.palButton.Controls.Add(this.btnPlayer);
             this.palButton.Controls.Add(this.btnBrowser);
-            this.palButton.Location = new System.Drawing.Point(1, 284);
+            this.palButton.Location = new System.Drawing.Point(1, 335);
             this.palButton.Name = "palButton";
             this.palButton.Size = new System.Drawing.Size(525, 51);
             this.palButton.TabIndex = 2;
@@ -111,11 +116,34 @@
             this.wmpVideo.Size = new System.Drawing.Size(525, 287);
             this.wmpVideo.TabIndex = 1;
             // 
+            // trbProgress
+            // 
+            this.trbProgress.Location = new System.Drawing.Point(1, 284);
+            this.trbProgress.Name = "trbProgress";
+            this.trbProgress.Size = new System.Drawing.Size(525, 45);
+            this.trbProgress.TabIndex = 3;
+            this.trbProgress.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trbProgress.Scroll += new System.EventHandler(this.trbProgress_Scroll);
+            // 
+            // tmrPlay
+            // 
+            this.tmrPlay.Interval = 1000;
+            this.tmrPlay.Tick += new System.EventHandler(this.tmrPlay_Tick);
+            // 
+            // lblTime
+            // 
+            this.lblTime.Font = new System.Drawing.Font("新細明體", 14F);
+            this.lblTime.Location = new System.Drawing.Point(325, 14);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(187, 23);
+            this.lblTime.TabIndex = 4;
+            // 
             // frmMediaPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 336);
+            this.ClientSize = new System.Drawing.Size(525, 386);
+            this.Controls.Add(this.trbProgress);
             this.Controls.Add(this.palButton);
             this.Controls.Add(this.wmpVideo);
             this.Name = "frmMediaPlayer";
@@ -123,7 +151,9 @@
             this.Load += new System.EventHandler(this.frmMediaPlayer_Load);
             this.palButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wmpVideo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbProgress)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -137,6 +167,9 @@
         private System.Windows.Forms.Button btnPlayer;
         private System.Windows.Forms.Button btnBrowser;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.TrackBar trbProgress;
+        private System.Windows.Forms.Timer tmrPlay;
     }
 }
 
